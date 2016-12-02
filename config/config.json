@@ -1,0 +1,49 @@
+{
+    "development": {
+        "title": "SE_Shoes",
+        "port": 3000,
+        "db": {
+            "host": "188.166.179.118",
+            "username": "seshoes",
+            "password": "23456789",
+            "database": "se_shoes",
+            "dialect": "mysql",
+            "logging": true,
+	        "multipleStatements": true,
+            "timezone": "+09:00",
+            "upload_path": "webdata/uploads",
+            "define" : {
+                "charset": "utf8",
+                "collate": "utf8_general_ci"
+            }
+        },
+        "email" : {
+            "id" : "",
+            "password" : ""
+        }
+    },
+    "production": {
+        "title": "SE_Shoes",
+        "port": 3000,
+        "db": {
+            "host": "127.0.0.1",
+            "port": "3306",
+            "username": "seshoes",
+            "password": "23456789",
+            "database": "se_shoes",
+            "dialect": "mysql",
+            "logging": true,
+            "multipleStatements": true,
+            "timezone": "+09:00",
+            "upload_path": "webdata/uploads",
+            "define" : {
+                "charset": "utf8",
+                "collate": "utf8_general_ci"
+            }
+        },
+        "email" : {
+            "id" : "",
+            "password" : ""
+        }
+    }
+}
