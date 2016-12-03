@@ -11,14 +11,14 @@ module.exports = function(grunt) {
     var reloadPort = 35729,
         files;
 
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    develop: {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        develop: {
             server: {
                 file: 'bin/www'
             }
-    },
-    watch: {
+        },
+        watch: {
             options: {
                 nospawn: true,
                 livereload: reloadPort
@@ -43,9 +43,9 @@ module.exports = function(grunt) {
                 options: {
                     livereload: reloadPort
                 }
-            }
+            }   
         }
-  });
+    });
 
     grunt.config.requires('watch.server.files');
     files = grunt.config('watch.server.files');
