@@ -2,7 +2,8 @@ var app = angular.module('mainApp', [
     'ngRoute',
     'ngAnimate',
     'ngTouch',
-    'ngMaterial'
+    'ngMaterial',
+    'ngMessages'
 ]);
 
 /*var app = angular.module('mainApp', [
@@ -40,6 +41,42 @@ app.config(function ($routeProvider) {
     .when('/signin', {
         /*controller: 'MainCtrl',*/
         templateUrl: '/views/customer/signin.html'
+    })
+    .when('/item/list', {
+        controller: 'ItemCtrl',
+        templateUrl: '/views/customer/item/list.html'
+    })
+    .when('/item/view/:itemId', {
+        controller: 'ItemCtrl',
+        templateUrl: '/views/customer/item/view.html'
+    })
+    .when('/auction/list', {
+        /*controller: 'ItemCtrl',*/
+        templateUrl: '/views/customer/auction/list.html'
+    })
+    .when('/auction/view/:itemId', {
+        /*controller: 'ItemCtrl',*/
+        templateUrl: '/views/customer/auction/view.html'
+    })
+    .when('/board/list/:type', {
+        /*controller: 'ItemCtrl',*/
+        templateUrl: '/views/customer/board/list.html'
+    })
+    .when('/board/view/:type/:boardId', {
+        /*controller: 'ItemCtrl',*/
+        templateUrl: '/views/customer/board/view.html'
+    })
+    .when('/user/cart', {
+        /*controller: 'MainCtrl',*/
+        templateUrl: '/views/customer/user/cart.html'
+    })
+    .when('/user/order', {
+        controller: 'UserCtrl',
+        templateUrl: '/views/customer/user/order.html'
+    })
+    .when('/user/modify', {
+        controller: 'UserCtrl',
+        templateUrl: '/views/customer/user/modify.html'
     })
     .otherwise({
       redirectTo: '/'

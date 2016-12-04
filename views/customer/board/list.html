@@ -1,0 +1,59 @@
+<style>
+    a, a:visited, a:hover, a:active {
+        color: inherit;
+        text-decoration:none
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" ng-init="">
+            검색:
+            <input type="text" value="title" ng-model="searchKeyword" placeholder="검색..." required  />
+            
+            <table class="table">
+                <colgroup>
+                    <col style="width: 80%">
+                    <col style="width: 10%">
+                    <col style="width: 10%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th scope="col" nowrap><span ng-click="sortBy('title')">제목</span></th>
+                        <th scope="col" nowrap><span ng-click="sortBy('author')">작성자</span></th>
+                        <th scope="col" nowrap><span ng-click="sortBy('time')">작성시간</span></th>
+                    </tr>
+                </thead>
+                <tbody id="the-list">
+                    <!-- <tr ng-repeat="boardPost in boardPostList | filter:searchKeyword | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" > -->
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="form-group">
+                <ul class="pagination pagination-border">
+                    <li><a href ng-click = "prevPage()">« Previous</a></li>
+                    <li><a ng-repeat="n in range(ret)" ng-click="setPage(n)" href="admin#/board/{{categoryId}}/list"> {{n+1}} </a></li>
+                    <li><a href ng-click = "nextPage()">Next »</a></li>
+                </ul>
+            </div> -->
+        </div>
+    </div>
+</div>
