@@ -36,6 +36,7 @@
 
     <!-- ng-animate -->
     <link href="/stylesheets/animation.css" rel="stylesheet">
+    <link href="/bower_components/angular-material/angular-material.min.css" rel="stylesheet">
 </head>
 
 <!-- Preloader -->
@@ -43,12 +44,11 @@
     <div id="status">&nbsp;</div>
 </div>
 
-<body ng-app="mainApp">
+<body ng-app="mainApp" ng-cloak>
 <div class="sb-site-container">
     <div class="boxed">
         <div ng-include="'/views/layout/header.html'"></div>
-        <div ng-include="'/views/layout/nav.html'"></div>
-        <div ng-include="'/views/layout/slide.html'"></div>
+        <div ng-include="'/views/layout/nav.html'" ng-controller="MainCtrl"></div>
         <div ng-view></div>
         <div ng-include="'/views/layout/footer.html'"></div>
     </div> <!-- boxed -->
@@ -94,10 +94,15 @@
 <script src="/bower_components/angular/angular.min.js"></script>
 <script src="/bower_components/angular-route/angular-route.min.js"></script>
 <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="/bower_components/angular-touch/angular-touch.min.js"></script>
+<script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="/bower_components/angular-material/angular-material.min.js"></script>
+
 <!--
 <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
 <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-<script src="/bower_components/angular-touch/angular-touch.min.js"></script>
+
 <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
@@ -105,6 +110,7 @@
 
 <!-- module js -->
 <script src="/angular/core/app.js"></script>
+<script src="/angular/controller/customer/mainCtrl.js"></script>
 <script src="/angular/controller/customer/auctionCtrl.js"></script>
 <script src="/angular/controller/customer/boardCtrl.js"></script>
 <script src="/angular/controller/customer/itemCtrl.js"></script>
