@@ -20,20 +20,6 @@ var order = require('./routes/rest/order');
 var popup = require('./routes/rest/popup');
 var user = require('./routes/rest/user');
 
-
-//storage destination
-var _storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-   
-    cb(null, config.db.upload_path)
-  },
-  filename: function (req, file, cb) {
-    
-    cb(null, file.originalname);
-  }
-})
-
-
 var app = express();
 
 // view engine setup

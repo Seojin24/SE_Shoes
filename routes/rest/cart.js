@@ -7,7 +7,7 @@ models.Cart.belongsTo(models.Item);
 models.Cart.belongsTo(models.User);
 
 // 특정 유저의 카트 정보 session 이용
-router.get('/', function(req, res) {
+router.get('/', isLogin, function(req, res) {
 	models.Cart.findAll({
         order : 'id ASC',
         where : {UserId : req.session.user.id},
@@ -37,24 +37,20 @@ router.get('/', function(req, res) {
 });
 
 // 카트 추가
-router.post('/', function(req, res) {
-    if (req.session.user !== null) {
-        req.body.UserId = req.session.user.id;
-
-        models.Cart.create(req.body).then(function() {
-            res.send({
-                error: false
-            });
-        }).catch( function ( error ) {
-            res.send({ error : true });
+router.post('/', isLogin, function(req, res) {
+    req.body.UserId = req.session.user.id;
+    
+    models.Cart.create(req.body).then(function() {
+        res.send({
+            error: false
         });
-    } else {
-    	res.send({ error : true });
-    }
+    }).catch( function ( error ) {
+        res.send({ error : true });
+    });
 });
 
 // 카트에 상품 삭제
-router.delete('/:id', function(req, res) {
+router.delete('/:id', isLogin, function(req, res) {
 	models.Cart.findOne({
         where: {
             id: req.params.id
@@ -73,5 +69,12 @@ router.delete('/:id', function(req, res) {
         }
     });
 });
+
+function isLogin(req,res,next) {
+    if(req.session.user)
+        next();
+    else
+        res.send({error:true, msg:'doLogin'});
+}
 
 module.exports = router;
