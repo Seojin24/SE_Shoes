@@ -19,7 +19,6 @@ app.run(['$rootScope', '$http', '$location', '$controller', function($rootScope,
         if(!data.error)
             $rootScope.session = data;
     })
-    console.log($rootScope.session);
 
     /*//로그인 상태인지 체크
     $rootScope.loginInterceptor = function() {

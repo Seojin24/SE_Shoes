@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+
+    <title>SE shoes</title>
+
+    <!-- CSS -->
+    <link href="/assets/css/preload.css" rel="stylesheet">
+
+    <!-- Compiled in vendors.js -->
+    <!--
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/animate.min.css" rel="stylesheet">
+    <link href="assets/css/slidebars.min.css" rel="stylesheet">
+    <link href="assets/css/lightbox.css" rel="stylesheet">
+    <link href="assets/css/jquery.bxslider.css" rel="stylesheet" />
+    <link href="assets/css/buttons.css" rel="stylesheet">
+    -->
+
+    <link href="/assets/css/vendors.css" rel="stylesheet">
+    <link href="/assets/css/syntaxhighlighter/shCore.css" rel="stylesheet" >
+
+    <!-- RS5.0 Stylesheet -->
+    <!--<link rel="stylesheet" type="text/css" href="assets/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/navigation.css">-->
+    <link href="/assets/css/style-blue.css" rel="stylesheet" title="default">
+    <link href="/assets/css/width-full.css" rel="stylesheet" title="default">
+
+    <!-- ng-animate -->
+    <link href="/stylesheets/animation.css" rel="stylesheet">
+    <link href="/bower_components/angular-material/angular-material.min.css" rel="stylesheet">
+
+    <!-- angular-datatable -->
+    <link href="/bower_components/angular-datatables/dist/css/angular-datatables.min.css" rel="stylesheet">
+</head>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<body ng-app="adminApp" ng-cloak>
+<div class="sb-site-container">
+    <div class="boxed">
+        <!-- <div ng-include="'/views/layout/header.html'"></div> -->
+        <div ng-include="'/views/layout/adminNav.html'" ng-controller="MainAdminCtrl"></div>
+        <div ng-view></div>
+        <div ng-include="'/views/layout/footer.html'"></div>
+    </div> <!-- boxed -->
+</div> <!-- sb-site -->
+<div id="back-top">
+    <a href="#header"><i class="fa fa-chevron-up"></i></a>
+</div>
+
+<!-- Scripts -->
+<!-- Compiled in vendors.js -->
+<!--
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
+<script src="assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-switch.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/slidebars.min.js"></script>
+<script src="assets/js/jquery.bxslider.min.js"></script>
+<script src="assets/js/holder.js"></script>
+<script src="assets/js/buttons.js"></script>
+<script src="assets/js/jquery.mixitup.min.js"></script>
+<script src="assets/js/circles.min.js"></script>
+<script src="assets/js/masonry.pkgd.min.js"></script>
+<script src="assets/js/jquery.matchHeight-min.js"></script>
+-->
+<script src="/assets/js/vendors.js"></script>
+<script src="/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+
+<!--<script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
+<script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js?rev=5.0"></script>-->
+
+<!-- Syntaxhighlighter -->
+<script src="/assets/js/syntaxhighlighter/shCore.js"></script>
+<script src="/assets/js/syntaxhighlighter/shBrushXml.js"></script>
+<script src="/assets/js/syntaxhighlighter/shBrushJScript.js"></script>
+
+<script src="/assets/js/DropdownHover.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="/assets/js/holder.js"></script>
+<script src="/assets/js/commerce.js"></script>
+
+<!--angular-->
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-route/angular-route.min.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="/bower_components/angular-touch/angular-touch.min.js"></script>
+<script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="/bower_components/angular-material/angular-material.min.js"></script>
+<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+<!--
+<script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
+<script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="/bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> -->
+
+<!-- module js -->
+<script src="/angular/core/adminApp.js"></script>
+<script src="/angular/controller/admin/mainAdminCtrl.js"></script>
+<script src="/angular/controller/admin/auctionAdminCtrl.js"></script>
+<script src="/angular/controller/admin/boardAdminCtrl.js"></script>
+<script src="/angular/controller/admin/itemAdminCtrl.js"></script>
+<script src="/angular/controller/admin/userAdminCtrl.js"></script>
+<script src="/angular/controller/admin/popupAdminCtrl.js"></script>
+<script src="/angular/controller/admin/orderAdminCtrl.js"></script>
+
+</body>
+
+</html>

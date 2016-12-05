@@ -12,9 +12,14 @@ var multipart = require('connect-multiparty');
 
 var multipartMiddleware = multipart();
 
-/* GET home page. */
+/* customer page. */
 router.get('/', function(req, res, next) {
   res.render('layout/mainLayout');
+});
+
+/* admin page. */
+router.get('/admin', function(req, res, next) {
+  res.render('layout/adminLayout');
 });
 
 // 로그인
