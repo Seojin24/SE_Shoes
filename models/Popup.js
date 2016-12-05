@@ -1,5 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
     var Popup = sequelize.define("Popup", {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: "팝업 제목"
+        },
         startDate: {
             type: DataTypes.DATEONLY,
             allowNull: false,
@@ -18,7 +23,6 @@ module.exports = function(sequelize, DataTypes) {
         link: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 0,
             comment: "팝업 클릭시 이동 링크"
         }
     }, {

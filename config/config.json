@@ -1,5 +1,5 @@
 {
-    "development3": {
+    "development": {
         "title": "SE_Shoes",
         "port": 3000,
         "db": {
@@ -22,7 +22,7 @@
             "password" : ""
         }
     },
-    "development": {
+    "development2": {
         "title": "SE_Shoes",
         "port": 3000,
         "db": {

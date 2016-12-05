@@ -1,8 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
     var Order = sequelize.define("Order", {
-        date: {
-            type: DataTypes.DATE,
+        price: {
+            type: DataTypes.INTEGER,
             allowNull: false,
+            comment: "주문 시간"
+        },
+        discount: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
             comment: "주문 시간"
         }
     }, {

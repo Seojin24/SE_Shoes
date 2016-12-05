@@ -7,12 +7,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var memoryStore = require('session-memory-store')(session);
+var config = require('./config/config.json')[process.env.NODE_ENV || "development"];
+
 var routes = require('./routes/index');
-//var users = require('./routes/users');
-//var config = require('./config/config.json')[process.env.NODE_ENV || "development"];
+var auction = require('./routes/rest/auction');
+var board = require('./routes/rest/board');
+var cart = require('./routes/rest/cart');
+var item = require('./routes/rest/item');
+var itemBrand = require('./routes/rest/brand');
+var itemType = require('./routes/rest/type');
+var order = require('./routes/rest/order');
+var popup = require('./routes/rest/popup');
+var user = require('./routes/rest/user');
+
 
 //storage destination
-/*var _storage = multer.diskStorage({
+var _storage = multer.diskStorage({
   destination: function (req, file, cb) {
    
     cb(null, config.db.upload_path)
@@ -22,7 +32,7 @@ var routes = require('./routes/index');
     cb(null, file.originalname);
   }
 })
-*/
+
 
 var app = express();
 
@@ -53,7 +63,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/', routes);
-//app.use('/users', users);
+app.use('/rest/item', item);
+app.use('/rest/brand', itemBrand);
+app.use('/rest/type', itemType);
+app.use('/rest/auction', auction);
+app.use('/rest/cart', cart);
+app.use('/rest/order', order);
+app.use('/rest/board', board);
+app.use('/rest/popup', popup);
+app.use('/rest/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
