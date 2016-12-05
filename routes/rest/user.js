@@ -42,7 +42,7 @@ router.post('/', function(req, res) {
 	        req.body.password = sha256(req.body.password);
             req.body.type = 1;
 
-            models.User.create(req.body).then(function() {
+            models.User.create(req.body).then(function(user) {
                 res.send({
                     error: false
                 });

@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 </style>
-<section class="css-section">
+<section class="css-section" ng-controller="MainCtrl">
     <h2 class="section-title">Bxslider</h2>
     <div class="row">
         <ul class="bxslider" id="bx1">
@@ -14,16 +14,3 @@
         </ul>
     </div>
 </section>
-<script>
-    $(document).ready(function(){
-        $('#bx1').bxSlider({adaptiveHeight: true});
-    });
-    /*app.run(function() {
-        angular.element(document).ready(function(){
-        //document.ready 전에 일어나는걸 막는? setTimeout에 감싸야함.
-        setTimeout(function(){
-            angular.element('#bx1').bxSlider({});
-        });
-    });
-    })*/
-</script>

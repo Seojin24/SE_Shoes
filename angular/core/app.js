@@ -15,10 +15,11 @@ var app = angular.module('mainApp', [
 ]);*/
 /*app.run(['$rootScope', '$http', '$cookies', '$location', '$controller', '$sce', function($rootScope, $http, $cookies, $location, $controller, $sce) {*/
 app.run(['$rootScope', '$http', '$location', '$controller', function($rootScope, $http, $location, $controller) {
-    /*$http.get('/getSession').success(function(data) {
-        if(data)
+    $http.get('/getSession').success(function(data) {
+        if(!data.error)
             $rootScope.session = data;
-    })*/
+    })
+    console.log($rootScope.session);
 
     /*//로그인 상태인지 체크
     $rootScope.loginInterceptor = function() {
@@ -39,7 +40,15 @@ app.config(function ($routeProvider) {
         templateUrl: '/views/customer/main.html'
     })
     .when('/signin', {
-        /*controller: 'MainCtrl',*/
+        controller: 'MainCtrl',
+        templateUrl: '/views/customer/signin.html'
+    })
+    .when('/signup', {
+        controller: 'MainCtrl',
+        templateUrl: '/views/customer/signin.html'
+    })
+    .when('/finding', {
+        controller: 'MainCtrl',
         templateUrl: '/views/customer/signin.html'
     })
     .when('/item/list', {

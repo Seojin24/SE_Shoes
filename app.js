@@ -48,10 +48,9 @@ app.use(favicon(path.join(__dirname, 'public/images/', 'favicon.ico')));
 // Session
 app.use(session({
     secret: 'se-shoues',
-    proxy: true,
-    resave: true,
+    cookie: { maxAge: 60000 }, 
+    resave: true, 
     saveUninitialized: true,
-    cookie: { maxAge: 3*60*60*1000 }, 
     store : new memoryStore()
 }));
 
