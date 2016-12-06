@@ -1,35 +1,13 @@
-app.controller('ItemAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsBuilder', 'DTColumnBuilder','$mdDialog', function($scope, $q, $http, Upload,DTOptionsBuilder, DTColumnBuilder,$mdDialog){
+app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','DTOptionsBuilder', 'DTColumnBuilder','$mdDialog', function($scope, $q, $http, $location, Upload ,DTOptionsBuilder, DTColumnBuilder,$mdDialog){
 	$scope.initList = function(){
-		$scope.itemList = [{name:'Bq Aquaris 5 16GB White',price:249.99,image:'assets/img/demo/e_img03.jpg'},
-                        {name:'LG 55LA620S 55" LED 3D',price:999.99,image:'assets/img/demo/e_img07.jpg'},
-                        {name:'Iphone 5S',price:649.00,image:'assets/img/demo/e_img01.jpg'},
-                        {name:'Keyboard Pro Game',price:49.99,image:'assets/img/demo/e_img02.jpg'},
-                        {name:'Doogee Voyager DG300 Black',price:99.99,image:'assets/img/demo/e_img04.jpg'},
-                        {name:'Gigabyte GeForce GTX 660',price:224.00,image:'assets/img/demo/e_img05.jpg'}];
-	
+		$http.get('/rest/item').then(function(data){
+			$scope.itemList = data.data;
+		})
+
         $scope.dtOptions = DTOptionsBuilder.newOptions()
         .withDisplayLength(10)
         .withOption('bLengthChange', false);
 	}
-
-    $scope.brandList=[
-        {id:1,
-            title:"나이끼"},{
-            id:2,
-            title:"푸먀"
-        }
-    ];
-
-    $scope.typeList=[
-        {id:1,
-            name:"타입1"},
-        {
-            id:2,
-            name:"타입2"
-        }
-    ];
-
-
 
     $scope.initView = function(){
 
@@ -44,19 +22,11 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsBuil
             $scope.typeList = data[1].data;
         });
 	}
-
-	$scope.itemAddSubmit = function(){
-		console.log($scope.item);
-
-		/*$scope.uploadPic = function (file) {
+	$scope.itemAddSubmit = function(file){
         file.upload = Upload.upload({
-            url: '/slide',
+            url: '/rest/item',
             method: 'POST',
-            fields: {
-                title: $scope.title,
-                link: $scope.link,
-                seq: $scope.number
-            },
+            fields: $scope.item,
             file: file,
             fileFormDataName: 'photo'
         });
@@ -65,17 +35,15 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsBuil
             if (response.status > 0)
                 $scope.errorMsg = response.status + ': ' + response.data;
         });
-
         file.upload.progress(function (evt) {
             // Math.min is to fix IE which reports 200% sometimes
             file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
-
         file.upload.success(function (data, status, headers, config) {
             // file is uploaded successfully
-            $location.path("/slide/list");
-        });}*/
-        
+            alert('상품을 등록하였습니다.')
+            $location.path("../");
+        });
 	}
 
     $scope.brandAdd = function(ev, brand) {
@@ -178,4 +146,23 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsBuil
     };
 
 
+}]);
+
+app.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
 }]);

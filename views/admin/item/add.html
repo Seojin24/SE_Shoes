@@ -1,28 +1,14 @@
 <style>
-    .filebox label {
-  display: inline-block;
-  padding: .5em .75em;
-  color: #999;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #fdfdfd;
-  cursor: pointer;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: .25em;
-}
-
-.filebox input[type="file"] {  /* 파일 필드 숨기기 */
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip:rect(0,0,0,0);
-  border: 0;
-}
+    .filebox input[type="file"] {  /* 파일 필드 숨기기 */
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip:rect(0,0,0,0);
+      border: 0;
+    }
 </style>
 
 <div class="container" ng-init="initAdd()">
@@ -30,13 +16,13 @@
         <!-- concept function -->
         <div class="col-md-3">
             <h3 class="right-line">Register Product</h3>
-            <form role="form" ng-submit="itemAddSubmit()">
+            <form role="form" accept-charset="UTF-8" ng-submit="itemAddSubmit(file)">
                 <div class="ec-box">
-                    <a href="#"><img src="assets/img/demo/e_img03.jpg" alt=""></a>
+                    <img data-ng-src="{{uploadme.src}}" style="width:90%;"/>
                     <div class="ec-box-footer">
                         <label for="file" class="btn btn-ar btn-success btn-sm pull-right">이미지</label> 
                         <div class="filebox">
-                          <input id="file" type="file" accept="image/*">
+                            <input id="file" type="file" ngf-select accept="image/*" ng-model="file" ngf-multiple="false" fileread="uploadme.src">
                         </div>
                     </div>
                 </div>

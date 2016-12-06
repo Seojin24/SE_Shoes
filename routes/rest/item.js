@@ -1,7 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../../models');
+var config = require('../../config/config.json')[process.env.NODE_ENV || "development"];
 var session = require('express-session');
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+var path = require('path');
+var multer = require('multer');
+var async = require('async');
+
+var _storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, config.db.upload_path)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+var upload = multer({ storage: _storage }, {limits: 1024 * 1024 * 20});
 
 models.Item.belongsTo(models.ItemBrand);
 models.Item.belongsTo(models.ItemType);
@@ -10,28 +26,23 @@ models.Item.belongsTo(models.ItemType);
 router.get('/', function(req, res) {
 	models.Item.findAll({
         order : 'id ASC',
-        include: {
-            model: models.ItemBrand,
-            attributes: ['name']
-        },
-        include: {
+        include: [{
             model: models.ItemType,
             attributes: ['name']
-        }
+        },{
+            model: models.ItemBrand,
+            attributes: ['name']
+        }]
     }).then(function(itemSvArr) {
         var itemCliArr = [];
-        itemSvArr.forEach(function(itemSv) {
-            var itemCli = {};
-            itemCli.id = itemSv.id;
-            itemCli.title = itemSv.title;
-            itemCli.size = itemSv.size;
-            itemCli.price = itemSv.price;
-            itemCli.photo = itemSv.photo;
-            itemCli.explain = itemSv.explain;
-            itemCli.createdAt = itemSv.createdAt;
-            itemCli.brandName = itemSv.ItemBrands[0].dataValues.name;
-            itemCli.typeName = itemSv.ItemTypes[0].dataValues.name;
-            itemCliArr.push(itemCli);
+        itemSvArr.forEach(function(itemSv){
+            itemSv = itemSv.dataValues;
+            itemSv.ItemTypeName = itemSv.ItemType.dataValues.name;
+            itemSv.ItemBrandName = itemSv.ItemBrand.dataValues.name;
+            delete itemSv.ItemType;
+            delete itemSv.ItemBrand;
+            itemCliArr.push(itemSv);
+            console.log(itemSv);
         });
         res.contentType('application/json');
         res.send(itemCliArr);
@@ -39,24 +50,28 @@ router.get('/', function(req, res) {
 });
 
 // Create
-router.post('/', function(req, res) {
-	models.Item.findOne({
-	    where: {
-	        title: req.body.title
-	    }
-	}).then(function(item){
-	    if (item === null) {
-            models.Item.create(req.body).then(function() {
-                res.send({
-                    error: false
-                });
-            }).catch( function ( error ) {
-                res.send({ error: true });
+router.post('/', upload.single('file'), function(req, res) {
+    var newFilePath = path.join(config.db.upload_path, 'item', Date.now()+'-'+req.file.originalname);
+    req.body.photo = newFilePath;
+    models.Item.create(req.body).then(function(row) {
+        mkdirp(path.join(config.db.upload_path, 'item'), function( err ) {
+            if( err ) {
+                row.destroy();
+                res.send({error: true});
+            }            
+            fs.rename(req.file.path, newFilePath, function(err) {
+                if( err ) {
+                    row.destroy();
+                    res.send({error: true});
+                }
+                else {
+                    res.send({error: false});
+                }
             });
-	    } else {
-	    	res.send({ error: true });
-	    }
-	});
+        });
+    }).catch(function() {
+        res.send({error: true});
+    });
 });
 
 // Read
@@ -65,40 +80,27 @@ router.get('/:id', function(req, res) {
         where: {
             id: req.params.id
         },
-        include: {
-            model: models.ItemBrand,
-            attributes: ['name']
-        },
-        include: {
+        include: [{
             model: models.ItemType,
             attributes: ['name']
-        }
+        },{
+            model: models.ItemBrand,
+            attributes: ['name']
+        }]
     }).then(function(itemSv) {
-        if (itemSv !== null) {
-            var itemCli = {};
-            itemCli.id = itemSv.id;
-            itemCli.title = itemSv.title;
-            itemCli.size = itemSv.size;
-            itemCli.price = itemSv.price;
-            itemCli.photo = itemSv.photo;
-            itemCli.explain = itemSv.explain;
-            itemCli.createdAt = itemSv.createdAt;
-            itemCli.updatedAt = itemSv.updatedAt;
-            itemCli.brandName = itemSv.ItemBrands[0].dataValues.name;
-            itemCli.typeName = itemSv.ItemTypes[0].dataValues.name;
+        itemSv = itemSv.dataValues;
+        itemSv.ItemTypeName = itemSv.ItemType.dataValues.name;
+        itemSv.ItemBrandName = itemSv.ItemBrand.dataValues.name;
+        delete itemSv.ItemType;
+        delete itemSv.ItemBrand;
 
-            res.contentType('application/json');
-            res.send(itemCli);
-        } else {
-            res.send({
-                error: true
-            });
-        }
+        res.contentType('application/json');
+        res.send(itemSv);
     });
 });
 
 //Update
-router.put('/:id', loadUser, function(req, res) {
+router.put('/:id', function(req, res) {
     models.Item.findOne({
         where: {
             id: req.params.id
@@ -119,7 +121,7 @@ router.put('/:id', loadUser, function(req, res) {
 });
 
 // Delete
-router.delete('/:id', loadUser, function(req, res) {
+router.delete('/:id', function(req, res) {
 	models.Item.findOne({
         where: {
             id: req.params.id

@@ -11,7 +11,7 @@ app.run(['$rootScope', '$http', '$location', '$controller', function($rootScope,
     $http.get('/getSession').success(function(data) {
         if(!data.error)
             $rootScope.session = data;
-    })
+    });
 
     /*//로그인 상태인지 체크
     $rootScope.loginInterceptor = function() {
@@ -123,6 +123,10 @@ app.config(function ($routeProvider) {
         controller: 'UserAdminCtrl',
         templateUrl: '/views/admin/user/list.html'
     })
+        .when('/user/modify/:userId', {
+            controller: 'UserAdminCtrl',
+            templateUrl: '/views/admin/user/modify.html'
+        })
     .otherwise({
       redirectTo: '/'
     });

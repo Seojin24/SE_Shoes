@@ -1,1 +1,36 @@
-view/update/delete 포함
+<div class="container" ng-init="initList()">
+    <table datatable="ng" dt-options="dtOptions">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <!--<th>phone</th>-->
+            <th>email</th>
+            <!--<th>wallet</th>-->
+            <!--<th>mileage</th>-->
+            <!--<th>address</th>-->
+            <!--<th>type</th>-->
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in userList">
+            <td nowrap>{{user.id}}</td>
+            <td nowrap>{{user.name}}</td>
+            <!--<td nowrap>{{user.phone}}</td>-->
+            <td>{{user.email}}</td>
+          <!--  <td>{{user.wallet}}</td>
+            <td>{{user.mileage}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.type}}</td>-->
+            <td>
+                <button class="btn btn-primary" ng-click="modifyUser(user)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>

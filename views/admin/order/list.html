@@ -1,1 +1,18 @@
-list+statistics
+<div class="container" ng-init="initList()">
+    <table datatable="ng" dt-options="dtOptions">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Price</th>
+            <th>Discount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in orderList">
+            <td><a href="/admin#/order/view/{{order.id}}">{{order.id}}</td>
+            <td>{{order.price}}</td>
+            <td>{{order.discount}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
