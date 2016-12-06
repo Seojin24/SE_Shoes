@@ -104,6 +104,8 @@ router.put('/:id', function(req, res) {
 
 // Create
 router.post('/admin', function(req, res) {
+    req.body.bidPrice=0;
+    console.log(req.body);
     models.Auction.create(req.body).then(function() {
         res.send({
             error: false
