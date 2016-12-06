@@ -41,12 +41,7 @@ app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$s
             $scope.typeList = data[2];
         });*/
     }
-
-    $scope.bid = function(bidPrice) {
-        console.log(1);
-    }
-
-    $scope.showPrompt = function(ev, auction) {
+    $scope.bid = function(ev, auction) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.prompt()
           .title('입찰금을 입력 하십시오.')
@@ -78,11 +73,9 @@ app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$s
                 }
                 else {
                     alert('현재 입찰금 보다 금액이 적습니다.');
-                    console.log(22);
                 }
             }
             }, function() {
-              console.log(22);
             });
         };
 }]);

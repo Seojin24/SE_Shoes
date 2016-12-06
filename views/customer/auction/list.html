@@ -23,7 +23,7 @@
                         <a href="#/item/view/{{auction.itemId}}"><img ng-src="/{{auction.photo}}" alt=""/></a>
                         <div class="ec-box-footer">
                             <span class="label label-primary"><del class="text-muted">{{auction.price | currency:"￦":0}}</del>&nbsp;{{auction.bidPrice | currency:"￦":0}}</span>
-                            <a ng-click="showPrompt($event, auction)" href="javascript:void(0);" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-heart"></i> Bid</a>
+                            <a ng-click="bid($event, auction)" href="javascript:void(0);" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-heart"></i> Bid</a>
                         </div>
                     </div>
                 </div>

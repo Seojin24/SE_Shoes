@@ -1,7 +1,6 @@
 var app = angular.module('adminApp', [
     'ngRoute',
     'ngAnimate',
-    'ngTouch',
     'ngMaterial',
     'ngMessages',
     'datatables'
@@ -31,9 +30,97 @@ app.config(function ($routeProvider) {
         controller: 'MainAdminCtrl',
         templateUrl: '/views/admin/main.html'
     })
+    //auction
+    .when('/auction/list/:type', {
+        controller: 'BoardAdminCtrl',
+        templateUrl: '/views/admin/auction/list.html'
+    })
+    .when('/auction/add/:type', {
+        controller: 'BoardAdminCtrl',
+        templateUrl: '/views/admin/auction/add.html'
+    })
+    //board
+    .when('/board/list/:type', {
+        controller: 'BoardAdminCtrl',
+        templateUrl: '/views/admin/board/list.html'
+    })
+    .when('/board/add/:type', {
+        controller: 'BoardAdminCtrl',
+        templateUrl: '/views/admin/board/add.html'
+    })
+    .when('/board/view/:type/:boardId', {
+        controller: 'BoardAdminCtrl',
+        templateUrl: '/views/admin/board/view.html'
+    })
+    .when('/board/modify/:type/:boardId', {
+        controller: 'BoardAdminCtrl',
+        templateUrl: '/views/admin/board/modify.html'
+    })
+    //item
+    .when('/item/list/', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/item/list.html'
+    })
+    .when('/item/add/', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/item/add.html'
+    })
+    .when('/item/view/:itemId', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/item/view.html'
+    })
+    .when('/item/modify/:boardId', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/item/modify.html'
+    })
+    //brand
     .when('/brand/list', {
         controller: 'ItemAdminCtrl',
         templateUrl: '/views/admin/brand/list.html'
+    })
+    .when('/brand/add', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/brand/add.html'
+    })
+    //type
+    .when('/type/list', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/type/list.html'
+    })
+    .when('/type/add', {
+        controller: 'ItemAdminCtrl',
+        templateUrl: '/views/admin/type/list.html'
+    })
+    //order
+    .when('/order/list', {
+        controller: 'OrderAdminCtrl',
+        templateUrl: '/views/admin/order/list.html'
+    })
+    .when('/order/view/:orderId', {
+        controller: 'OrderAdminCtrl',
+        templateUrl: '/views/admin/order/view.html'
+    })
+    .when('/order/statistics', {
+        controller: 'OrderAdminCtrl',
+        templateUrl: '/views/admin/order/statistics.html'
+    })
+    //popup
+    .when('/popup/list', {
+        controller: 'PopupAdminCtrl',
+        templateUrl: '/views/admin/popup/list.html'
+    })
+    .when('/popup/add', {
+        controller: 'PopupAdminCtrl',
+        templateUrl: '/views/admin/popup/add.html'
+    })
+    .when('/popup/modify/:popupId', {
+        controller: 'PopupAdminCtrl',
+        templateUrl: '/views/admin/popup/modify.html'
+    })
+    //user
+    .when('/user/list', {
+        controller: 'UserAdminCtrl',
+        templateUrl: '/views/admin/user/list.html'
     })
     .otherwise({
       redirectTo: '/'

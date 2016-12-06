@@ -1,7 +1,21 @@
 app.controller('UserCtrl', ['$scope', function($scope){
-    //initCart
-    //initOrder
-    //doOrder
+	/*$scope.initCart = function(){
+		$http.get('/rest/cart').then(function(data){
+			$scope.cartList = data;
+		});
+	}
+
+	$scope.initOrder = function(){
+		$http.get('/rest/order').then(function(data){
+			$scope.orderList = data;
+		});
+	}
+
+	$scope.addOrder = function(){
+		var submit={};
+		$http.post('/rest/order',submit).then(function(data){
+		});
+	}*/
 }]);
 
 app.config(function($mdThemingProvider) {
