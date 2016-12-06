@@ -36,7 +36,6 @@ router.get('/', function(req, res) {
             }
         }
     }).then(function(auctionSvArr) {
-        console.log(auctionSvArr);
         res.send(auctionSvArr);
         /*var auctionCliArr = [];
         auctionSvArr.forEach(function(auctionSv) {
@@ -78,37 +77,19 @@ router.get('/:id', function(req, res) {
             }
         }
     }).then(function(auctionSv) {
-        console.log(auctionSv);
         res.send(auctionSv);
-        /*
-        var auctionCli = {
-            id : auctionSv.id,
-            bidPrice : auctionSv.bidPrice,
-            auctionStart : auctionSv.auctionStart,
-            auctionEnd : auctionSv.auctionEnd,
-            title : auctionSv.Items[0].title,
-            size : auctionSv.Items[0].size,
-            photo : auctionSv.Items[0].photo,
-            price : auctionSv.Items[0].price,
-            brandName : auctionSv.Items[0].ItemBrands[0].name,
-            typeName : auctionSv.Items[0].ItemTypes[0].name
-        };
-        res.contentType('application/json');
-        res.send(userCli);*/
     });
 });
 
 //입찰
 router.put('/:id', function(req, res) {
-    req.body.password = sha256(req.body.password);
-    models.User.findOne({
+    models.Auction.findOne({
         where: {
-            user_id: req.params.id,
-            password: req.body.password
+            id: req.params.id,
         }
-    }).then(function(user) {
-        if (user !== null) {
-            user.updateAttributes(req.body).then(function() {
+    }).then(function(auction) {
+        if (auction !== null) {
+            auction.updateAttributes(req.body).then(function() {
                 res.send({
                     error: false
                 });
@@ -123,39 +104,23 @@ router.put('/:id', function(req, res) {
 
 // Create
 router.post('/admin', loadUser, function(req, res) {
-    models.User.findOne({
-        where: {
-            user_id: req.body.user_id
-        }
-    }).then(function(user){
-        if (user === null) {
-            req.body.password = sha256(req.body.password);
-            req.body.type = 1;
-
-            models.User.create(req.body).then(function() {
-                res.send({
-                    error: false
-                });
-            }).catch( function ( error ) {
-                res.send({ emailConflict: true });
-            });
-        } else {
-            res.send({ idConflict: true });
-        }
+    models.Auction.create(req.body).then(function() {
+        res.send({
+            error: false
+        });
+    }).catch( function ( error ) {
+        res.send({ error: true });
     });
-
 });
 
 router.put('/admin/:id', loadUser, function(req, res) {
-    models.User.findOne({
+    models.Auction.findOne({
         where: {
-            user_id: req.params.id
+            id: req.params.id
         }
-    }).then(function(user) {
-        if(req.body.password)
-            req.body.password = sha256(req.body.password);
-        if (user !== null) {
-            user.updateAttributes(req.body).then(function() {
+    }).then(function(auction) {
+        if (auction !== null) {
+            auction.updateAttributes(req.body).then(function() {
                 res.send({
                     error: false
                 });
@@ -169,14 +134,14 @@ router.put('/admin/:id', loadUser, function(req, res) {
 });
 
 // Delete - admin 쪽 회원 탈퇴
-router.delete('/:id', loadUser, function(req, res) {
-	models.User.findOne({
+router.delete('/admin/:id', loadUser, function(req, res) {
+	models.Auction.findOne({
         where: {
-            user_id: req.params.id
+            id: req.params.id
         }
-    }).then(function(user) {
-        if (user !== null) {
-            user.destroy().then(function() {
+    }).then(function(auction) {
+        if (auction !== null) {
+            auction.destroy().then(function() {
                 res.send({
                     error: false
                 });
@@ -194,11 +159,11 @@ function loadUser(req,res,next) {
         if(req.session.user.type == 0){ //관리자
             next();
         }else{ //일반 사용자
-            res.redirect('"/main#/"');
+            res.redirect('"/#/"');
         }
     }
     else {
-        res.redirect('"/main#/"');
+        res.redirect('"/#/"');
     }
 }
 

@@ -15,26 +15,59 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$location', '$mdSi
         $mdSidenav(componentId).toggle();
       }
     }
+    $scope.initMain = function() {
+        //popupList 불러오기
+        /*$http.get('/popup/today').success(function (res) {
+            res.forEach( function (popup) {
+                $scope.popupList.push(popup);
+                for(var i=0; i<disabledPopup.length; i++) {
+                    if( disabledPopup[i] == popup.id ) {
+                        $scope.popupList.pop();
+                        break;
+                    }
+                }
+            });
+        });*/
+    }
+
+    /*$scope.closePopup = function(popup_idx, popupId) {
+        angular.element('#popup'+popup_idx).hide();
+    }
+
+    $scope.closePopupDay = function(popup_idx, popupId) {
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate()+1);
+
+        var popupCookie = $cookies.getObject('popup');
+        if( popupCookie == null )
+            popupCookie = [];
+
+        popupCookie.push(popupId, {expires: expireDate});
+
+        $cookies.putObject('popup', popupCookie);
+        angular.element('#popup'+popup_idx).hide();
+    }*/
 
     angular.element(document).ready(function(){
         //document.ready 전에 일어나는걸 막는? setTimeout에 감싸야함.
-        setTimeout(function(){
-            angular.element('#bx5').bxSlider({
-                minSlides: 2,
-                maxSlides: 3,
-                slideWidth: 360,
-                slideMargin: 10,
-                pager: false,
-                ticker: true,
-                speed: 12000,
-                tickerHover: true,
-                useCSS: false
-            });
-            angular.element('#bx1').bxSlider({
-                adaptiveHeight: true
+            setTimeout(function(){
+                angular.element('#bx5').bxSlider({
+                    minSlides: 2,
+                    maxSlides: 3,
+                    slideWidth: 360,
+                    slideMargin: 10,
+                    pager: false,
+                    ticker: true,
+                    speed: 12000,
+                    tickerHover: true,
+                    useCSS: false
+                });
+                angular.element('#bx1').bxSlider({
+                    adaptiveHeight: true
+                });
             });
         });
-    });
+    
 
     //for signin, signup, finding
     $scope.initLoginForm = function() {

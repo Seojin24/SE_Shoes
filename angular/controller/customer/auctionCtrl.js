@@ -46,22 +46,43 @@ app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$s
         console.log(1);
     }
 
-    $scope.showPrompt = function(ev) {
+    $scope.showPrompt = function(ev, auction) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.prompt()
-          .title('What would you name your dog?')
-          .textContent('Bowser is a common name.')
-          .placeholder('Dog name')
-          .ariaLabel('Dog name')
-          .initialValue('Buddy')
+          .title('입찰금을 입력 하십시오.')
+          .textContent('현재 입찰금 보다 높은 금액을 입력 해야합니다.')
+          .placeholder('Bid price')
+          .ariaLabel('Bid price')
+          .initialValue(auction.bidPrice+5)
           .targetEvent(ev)
-          .ok('Okay!')
-          .cancel('I\'m a cat person');
+          .ok('입찰')
+          .cancel('취소');
 
         $mdDialog.show(confirm).then(function(result) {
-          $scope.status = 'You decided to name your dog ' + result + '.';
-        }, function() {
-          $scope.status = 'You didn\'t name your dog.';
-    });
-  };
+            if(Number.isInteger(parseInt(result)))
+            {
+                result = parseInt(result);
+                if(auction.bidPrice < result){
+                    alert('성공적으로 입찰을 하였습니다.');
+                    auction.bidPrice = result;
+
+                    /*$http.put('/rest/auction/'+auction.id,{bidPrice:result})
+                    .then(function(data){
+                        if(data.error == false){
+                            alert('성공적으로 입찰을 하였습니다.');
+                            auction.bidPrice = result;
+                        }
+                        else
+                            alert('입찰 중에 오류가 발생하였습니다. 다시 시도 해주십시오.');
+                    });*/
+                }
+                else {
+                    alert('현재 입찰금 보다 금액이 적습니다.');
+                    console.log(22);
+                }
+            }
+            }, function() {
+              console.log(22);
+            });
+        };
 }]);

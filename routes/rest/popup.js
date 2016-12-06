@@ -105,11 +105,11 @@ function loadUser(req,res,next) {
         if(req.session.user.type == 0){ //관리자
             next();
         }else{ //일반 사용자
-            res.redirect('"/main#/"');
+            res.redirect('"/#/"');
         }
     }
     else {
-        res.redirect('"/main#/"');
+        res.redirect('"/#/"');
     }
 }
 
