@@ -36,28 +36,39 @@ app.controller('ItemCtrl', ['$scope','$http','$location', '$routeParams', '$sce'
     $scope.initList = function(){
         console.log('success_list');
 
-        /*$q.all([
-            $http.get('/rest/item/'),
+        $q.all([
             $http.get('/rest/brand/'),
-            $http.get('/rest/type/')
+            $http.get('/rest/type/'),
+            $http.get('/rest/item/')
         ]).then(function(data){
-            $scope.itemList = data[0];
-            $scope.brandList = data[1];
-            $scope.typeList = data[2];
-        });*/
+            $scope.brandList = data[0].data;
+            $scope.typeList = data[1].data;
+            $scope.itemList = data[2].data;
+        });
+    };
+
+    $scope.setBrand=function(brand){
+        if(brand){$scope.brandFilter=brand.id;}else{$scope.brandFilter='';}
     }
+    $scope.setType=function(type){
+        if(type){$scope.typeFilter=type.id;}else{$scope.typeFilter='';}
+    }
+
+
 
     $scope.addCart = function(itemId){
         $http.post('/rest/cart/',{ItemId:itemId}).then(function(data){
-            if(data.error == false)
+            console.log(data);
+            if(data.data.error == false){
                 alert('상품을 장바구니에 담았습니다.');
+            }
             else{
                 console.log(data);
-                if(data.msg == 'doLogin')
+                if(data.data.msg == 'doLogin')
                     $location.path("#/signin")  
             } 
         });
-    }
+    };
 
 
     angular.element(document).ready(function(){

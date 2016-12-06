@@ -1,1 +1,20 @@
-modify, delete 포함
+<div class="container" ng-init="initList()">
+    <table datatable="ng" dt-options="dtOptions">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>bidPrice</th>
+            <th>remained date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="auction in auctionList">
+            <td nowrap>{{auction.name}}</td>
+            <td nowrap>{{auction.bidPrice}}</td>
+            <td nowrap>
+                <timer end-time="auction.endSecond">{{days}} Day {{hours}}:{{minutes}}:{{seconds}}</timer>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

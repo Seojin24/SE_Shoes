@@ -4,22 +4,19 @@
             <div class="ec-filters-menu">
                 <h3 class="section-title">Filters</h3>
                 <div class="col-sm-6 col-xs-6">
-                    <h4>Select Category</h4>
+                    <h4>Select Brand</h4>
                     <ul>
-                        <li><a href="javascript:void(0);" class="filter" data-filter="all">All</a></li>
-                        <li><a href="javascript:void(0);" class="filter" data-filter=".category-smartphone">Smaprtphones</a></li>
-                        <li><a href="javascript:void(0);" class="filter" data-filter=".category-tv">Smart TV</a></li>
-                        <li><a href="javascript:void(0);" class="filter" data-filter=".category-keyboard">Keyboards</a></li>
-                        <li><a href="javascript:void(0);" class="filter" data-filter=".category-graphic">Graphics Cards</a></li>
+                        <li><a href="javascript:void(0);" ng-click="setBrand()" class="filter" data-filter="all" >all</a></li>
+                        <li ng-repeat="brand in brandList">
+                            <a href="javascript:void(0);" ng-click="setBrand(brand)" data-filter="all" >{{brand.name}}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-xs-6">
-                    <h4>Order by</h4>
+                    <h4>Select Type</h4>
                     <ul>
-                        <li><a href="javascript:void(0);" class="sort" ng-click="orderFilter='price'">Price<i class="fa fa-sort-asc" aria-hidden="true"></i></a></li>
-                        <li><a href="javascript:void(0);" class="sort" data-sort="price:desc">Price<i class="fa fa-sort-desc" aria-hidden="true"></i></span></a></li>
-                        <li><a href="javascript:void(0);" class="sort" ng-click="orderFilter='name'">Name</a></li>
-                        <li><a href="javascript:void(0);" class="sort" data-sort="date:desc">Release Date</a></li>
+                        <li><a href="javascript:void(0);" ng-click="setType()" class="filter" data-filter="all" >all</a></li>
+                        <li ng-repeat="type in typeList"><a href="javascript:void(0);" ng-click="setType(type)" class="filter" data-filter="all">{{type.name}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,21 +52,16 @@
         </div>
         <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row" id="Container">
-                <div class="col-sm-4" ng-animate="'animate'" ng-repeat="item in itemList | orderBy:orderFilter">
-                    <div class="ec-box">
-                        <div class="ec-box-header"><a href="#">{{item.name}}</a></div>
-                        <a href="#"><img ng-src="/{{item.image}}" alt=""/></a>
-                        <div class="ec-box-footer">
-                            <span class="label label-primary">$ {{item.price}}</span>
-                            <a href="#" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- 이게 진짜 -->
-                <div class="col-sm-4" ng-animate="'animate'">
+                <div class="col-sm-4" ng-animate="'animate'" ng-repeat="item in itemList | filter:{'ItemBrandId':brandFilter,'ItemTypeId':typeFilter}">
+
+
+
+
                     <div class="ec-box">
                         <div class="ec-box-header"><a href="#/item/view/{{item.id}}">[{{item.ItemBrandName}}|{{item.ItemTypeName}}]{{item.title}}</a></div>
-                        <a href="#/item/view/{{item.id}}"><img ng-src="/{{item.photo}}" alt=""/></a>
+                        <a href="#/item/view/{{item.id}}"><img ng-src="/{{item.photo}}" alt="" style="width:100%;"/></a>
                         <div class="ec-box-footer">
                             <span class="label label-primary"> {{item.price | currency:"":0}}</span>
                             <a ng-click="addCart(item.id)" href="javascript:void(0);" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>

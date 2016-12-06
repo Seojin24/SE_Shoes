@@ -103,17 +103,20 @@ router.put('/:id', function(req, res) {
 });
 
 // Create
-router.post('/admin', loadUser, function(req, res) {
+router.post('/admin', function(req, res) {
     models.Auction.create(req.body).then(function() {
         res.send({
             error: false
         });
     }).catch( function ( error ) {
-        res.send({ error: true });
+        if(error)
+            res.send({ error: true });
+        else
+            res.send({ error: false});
     });
 });
 
-router.put('/admin/:id', loadUser, function(req, res) {
+router.put('/admin/:id', function(req, res) {
     models.Auction.findOne({
         where: {
             id: req.params.id
@@ -134,7 +137,7 @@ router.put('/admin/:id', loadUser, function(req, res) {
 });
 
 // Delete - admin 쪽 회원 탈퇴
-router.delete('/admin/:id', loadUser, function(req, res) {
+router.delete('/admin/:id', function(req, res) {
 	models.Auction.findOne({
         where: {
             id: req.params.id

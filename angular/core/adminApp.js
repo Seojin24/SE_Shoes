@@ -4,7 +4,8 @@ var app = angular.module('adminApp', [
     'ngMaterial',
     'ngMessages',
     'datatables',
-    'ngFileUpload'
+    'ngFileUpload',
+    'timer'
 ]);
 
 app.run(['$rootScope', '$http', '$location', '$controller', function($rootScope, $http, $location, $controller) {

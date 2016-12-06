@@ -1,16 +1,14 @@
-<div class="container">
+<div class="container" ng-init="initTypeList()">
     <table datatable="ng" dt-options="dtOptions">
         <thead>
         <tr>
             <th>name</th>
-            <!--<th>price</th>-->
             <th>action</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="type in typeList">
             <td>{{type.name}}</td>
-            <!--<td>{{brand.price}}</td>-->
             <td>
                 <button class="btn btn-primary" ng-click="typeModify($event, type)"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>

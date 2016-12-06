@@ -25,9 +25,10 @@ router.post('/', function(req, res) {
 	    }
 	}).then(function(itemBrand){
 	    if (itemBrand === null) {
-            models.ItemBrand.create(req.body).then(function() {
+            models.ItemBrand.create(req.body).then(function(result) {
                 res.send({
-                    error: false
+                    error: false,
+                    result: result
                 });
             }).catch( function ( error ) {
                 res.send({ error: true });

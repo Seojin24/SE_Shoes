@@ -30,6 +30,7 @@ app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/views', express.static(path.join(__dirname, 'views')));
 app.use('/angular', express.static(path.join(__dirname, 'angular')));
+app.use('/webdata', express.static(path.join(__dirname, 'webdata')));
 app.use(favicon(path.join(__dirname, 'public/images/', 'favicon.ico')));
 // Session
 app.use(session({

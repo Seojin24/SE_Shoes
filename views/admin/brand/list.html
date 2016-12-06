@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-init="initBrandList()">
 	<table datatable="ng" dt-options="dtOptions">
 		<thead>
 		<tr>
@@ -9,7 +9,7 @@
 		</thead>
 		<tbody>
 		<tr ng-repeat="brand in brandList">
-			<td>{{brand.title}}</td>
+			<td>{{brand.name}}</td>
 			<!--<td>{{brand.price}}</td>-->
 			<td>
 				<button class="btn btn-primary" ng-click="brandModify($event, brand)"><i class="fa fa-edit"></i></button>

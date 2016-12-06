@@ -21,13 +21,21 @@
         <h2 class="slidebar-header no-margin-bottom">메뉴</h2>
         <ul class="slidebar-menu">
             <li><a href="#/">Home</a></li>
-            <li ng-hide="$root.session"><a href="#/signin">Login</a></li>
-            <li ng-hide="$root.session"><a href="#/signup">Registry</a></li>
-            <li ng-show="$root.session" ng-click="logout()"><a href="#/signin">Logout</a></li>
-            <li ng-show="$root.session"><a href="#/user/mypage">Mypage</a></li>
-            <li><a href="#/item/list">상품</a></li>
-            <li><a href="#/auction/list">경매</a></li>
-            <li><a href="#/">고객센터</a></li>
+            <li ng-hide="$root.session"><a href="#/signin"  ng-mouseover="sub=0">Login</a></li>
+            <li ng-hide="$root.session"><a href="#/signup" ng-mouseover="sub=0">Registry</a></li>
+            <li ng-show="$root.session" ng-click="logout()" ng-mouseover="sub=0"><a href="#/signin">Logout</a></li>
+            <li ng-show="$root.session"><a href="#/user/mypage" ng-mouseover="sub=0">Mypage</a></li>
+            <li><a href="#/item/list" ng-mouseover="sub=0">상품</a></li>
+            <li><a href="#/auction/list" ng-click="" ng-mouseover="sub=0">경매</a></li>
+            <li><a href="javascript:void(0);" ng-click="sub=1" >고객센터</a>
+                <ul>
+                    <li><a href="#/notice">공지사항</a></li>
+                    <li><a href="#/faq">FAQ</a></li>
+                    <li><a href="#/exchange">교환환불</a></li>
+                </ul>
+            <li></li>
+            <li></li>
+            </li>
         </ul>
         <h2 class="slidebar-header">Social Media</h2>
         <div class="slidebar-social-icons">

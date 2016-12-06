@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "경매 시작 날짜"
         },       
         auctionEnd: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATE,
             allowNull: false,
             comment: "경매 종료 날짜"
         }

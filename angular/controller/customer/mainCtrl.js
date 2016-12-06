@@ -98,7 +98,7 @@ app.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$location', '$mdSi
             }
             $http.post('/rest/user',submit).success(function(data){
                 if(data.error == false) {
-                    alert('회원가입이 완료되었습니다!')
+                    alert('회원가입이 완료되었습니다!');
                     $location.path("/");
                 }
             })

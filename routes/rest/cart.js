@@ -38,8 +38,11 @@ router.get('/', isLogin, function(req, res) {
 
 // 카트 추가
 router.post('/', isLogin, function(req, res) {
+    alert(req);
     req.body.UserId = req.session.user.id;
-    
+    req.body.ItemId = req.params.ItemId;
+
+
     models.Cart.create(req.body).then(function() {
         res.send({
             error: false

@@ -42,7 +42,6 @@ router.get('/', function(req, res) {
             delete itemSv.ItemType;
             delete itemSv.ItemBrand;
             itemCliArr.push(itemSv);
-            console.log(itemSv);
         });
         res.contentType('application/json');
         res.send(itemCliArr);

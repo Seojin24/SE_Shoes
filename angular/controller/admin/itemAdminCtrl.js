@@ -1,5 +1,6 @@
 app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','DTOptionsBuilder', 'DTColumnBuilder','$mdDialog', function($scope, $q, $http, $location, Upload ,DTOptionsBuilder, DTColumnBuilder,$mdDialog){
-	$scope.initList = function(){
+	//item
+    $scope.initList = function(){
 		$http.get('/rest/item').then(function(data){
 			$scope.itemList = data.data;
 		})
@@ -22,6 +23,7 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','
             $scope.typeList = data[1].data;
         });
 	}
+    
 	$scope.itemAddSubmit = function(file){
         file.upload = Upload.upload({
             url: '/rest/item',
@@ -45,6 +47,16 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','
             $location.path("../");
         });
 	}
+    //brand
+    $scope.initBrandList = function(){
+        $http.get('/rest/brand').then(function(data){
+            $scope.brandList = data.data;
+        })
+
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+        .withDisplayLength(10)
+        .withOption('bLengthChange', false);
+    }
 
     $scope.brandAdd = function(ev, brand) {
         // Appending dialog to document.body to cover sidenav in docs app
@@ -62,8 +74,10 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','
                 alert('다시 입력해주십시요.');
             }
             else{
-                alert('성공적으로 추가하였습니다.');
-                brand.title = result;
+                $http.post('/rest/brand',{name:result}).then(function(data){
+                    $scope.brandList.push(data.data.result);
+                    alert('성공적으로 추가하였습니다.');
+                })
             }
         }, function() {
         });
@@ -94,8 +108,16 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','
         });
     };
 
+    //type
+    $scope.initTypeList = function(){
+        $http.get('/rest/type').then(function(data){
+            $scope.typeList = data.data;
+        })
 
-
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+        .withDisplayLength(10)
+        .withOption('bLengthChange', false);
+    }
 
     $scope.typeAdd = function(ev, type) {
         // Appending dialog to document.body to cover sidenav in docs app
@@ -113,8 +135,11 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','
                 alert('다시 입력해주십시요.');
             }
             else{
-                alert('성공적으로 추가하였습니다.');
-                type.name = result;
+                $http.post('/rest/type',{name:result}).then(function(data){
+                    console.log(data.data.result);
+                    $scope.typeList.push(data.data.result);
+                    alert('성공적으로 추가하였습니다.');
+                })
             }
         }, function() {
         });

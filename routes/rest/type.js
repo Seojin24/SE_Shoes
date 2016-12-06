@@ -25,9 +25,10 @@ router.post('/', function(req, res) {
 	    }
 	}).then(function(itemType){
 	    if (itemType === null) {
-            models.ItemType.create(req.body).then(function() {
+            models.ItemType.create(req.body).then(function(result) {
                 res.send({
-                    error: false
+                    error: false,
+                    result: result
                 });
             }).catch( function ( error ) {
                 res.send({ error: true });

@@ -5,7 +5,8 @@ var app = angular.module('mainApp', [
     'ngMaterial',
     'ngMessages',
 //    'datatables',
-    'ngFileUpload'
+    'ngFileUpload',
+    'timer'
 ]);
 
 /*var app = angular.module('mainApp', [
