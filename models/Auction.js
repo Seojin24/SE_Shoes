@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             comment: "경매 시작 날짜"
         },       
-        auctionStart: {
+        auctionEnd: {
             type: DataTypes.STRING,
             allowNull: false,
             comment: "경매 종료 날짜"

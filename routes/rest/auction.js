@@ -18,6 +18,7 @@ models.Item.belongsTo(models.ItemType);
 
 // List
 //auction에 itemId 조인, brandId typeId 조인
+//오늘 날짜가 종료날짜보다 전인것만. 아니면 프론트딴에서 종료된건 disable하게
 //select auction.*, item.title, item.size, item.price, item.photo, item.explain, item_brand.name, item_type.name from auction left join item on auction.ItemId = item.id left join item_brand on item.ItemBrandId = item_brand.id left join item_type on item.ItemTypeId = item_type.id
 router.get('/', function(req, res) {
 	models.Auction.findAll({
@@ -35,21 +36,27 @@ router.get('/', function(req, res) {
             }
         }
     }).then(function(auctionSvArr) {
-        var auctionCliArr = [];
+        console.log(auctionSvArr);
+        res.send(auctionSvArr);
+        /*var auctionCliArr = [];
         auctionSvArr.forEach(function(auctionSv) {
-            /*var auctionCli = {};
-            userCli.id = userSv.id;
-            userCli.user_id = userSv.user_id;
-            userCli.user_name = userSv.user_name;
-            userCli.email = userSv.email;
-            userCli.type = userSv.type;
-            userCli.createdAt = userSv.createdAt;
-            userCli.updatedAt = userSv.updatedAt;
-            userCliArr.push(userCli);*/
-            console.log(auctionSv);
+            var auctionCli = {
+                id : auctionSv.id,
+                bidPrice : auctionSv.bidPrice,
+                auctionStart : auctionSv.auctionStart,
+                auctionEnd : auctionSv.auctionEnd,
+                itemId : auctionSv.ItemId,
+                title : auctionSv.Items[0].title,
+                size : auctionSv.Items[0].size,
+                photo : auctionSv.Items[0].photo,
+                price : auctionSv.Items[0].price,
+                brandName : auctionSv.Items[0].ItemBrands[0].name,
+                typeName : auctionSv.Items[0].ItemTypes[0].name
+            };
+            auctionCliArr.push(auctionCli);
         });
-        //res.contentType('application/json');
-        //res.send(userCliArr);
+        res.contentType('application/json');
+        res.send(auctionCliArr);*/
     });
 });
 
@@ -70,22 +77,24 @@ router.get('/:id', function(req, res) {
                 attributes: ['name']
             }
         }
-    }).then(function(auctionSvArr) {
-        var auctionCliArr = [];
-        auctionSvArr.forEach(function(auctionSv) {
-            /*var auctionCli = {};
-            userCli.id = userSv.id;
-            userCli.user_id = userSv.user_id;
-            userCli.user_name = userSv.user_name;
-            userCli.email = userSv.email;
-            userCli.type = userSv.type;
-            userCli.createdAt = userSv.createdAt;
-            userCli.updatedAt = userSv.updatedAt;
-            userCliArr.push(userCli);*/
-            console.log(auctionSv);
-        });
-        //res.contentType('application/json');
-        //res.send(userCliArr);
+    }).then(function(auctionSv) {
+        console.log(auctionSv);
+        res.send(auctionSv);
+        /*
+        var auctionCli = {
+            id : auctionSv.id,
+            bidPrice : auctionSv.bidPrice,
+            auctionStart : auctionSv.auctionStart,
+            auctionEnd : auctionSv.auctionEnd,
+            title : auctionSv.Items[0].title,
+            size : auctionSv.Items[0].size,
+            photo : auctionSv.Items[0].photo,
+            price : auctionSv.Items[0].price,
+            brandName : auctionSv.Items[0].ItemBrands[0].name,
+            typeName : auctionSv.Items[0].ItemTypes[0].name
+        };
+        res.contentType('application/json');
+        res.send(userCli);*/
     });
 });
 

@@ -1,7 +1,6 @@
 var app = angular.module('mainApp', [
     'ngRoute',
     'ngAnimate',
-    'ngTouch',
     'ngMaterial',
     'ngMessages'
 ]);
@@ -59,7 +58,7 @@ app.config(function ($routeProvider) {
         templateUrl: '/views/customer/item/view.html'
     })
     .when('/auction/list', {
-        /*controller: 'ItemCtrl',*/
+        controller: 'AuctionCtrl',
         templateUrl: '/views/customer/auction/list.html'
     })
     .when('/auction/view/:itemId', {

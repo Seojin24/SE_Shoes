@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-init="initList()">
     <div class="row">
         <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="ec-filters-menu">
@@ -69,7 +69,7 @@
                 <div class="col-sm-4" ng-animate="'animate'">
                     <div class="ec-box">
                         <div class="ec-box-header"><a href="#/item/view/{{item.id}}">[{{item.ItemBrandName}}|{{item.ItemTypeName}}]{{item.title}}</a></div>
-                        <a href="#"><img ng-src="/{{item.photo}}" alt=""/></a>
+                        <a href="#/item/view/{{item.id}}"><img ng-src="/{{item.photo}}" alt=""/></a>
                         <div class="ec-box-footer">
                             <span class="label label-primary"> {{item.price | currency:"":0}}</span>
                             <a ng-click="addCart(item.id)" href="javascript:void(0);" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>

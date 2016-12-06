@@ -1,4 +1,4 @@
-app.controller('ItemCtrl', ['$scope','$http','$location', function($scope, $http, $location){
+app.controller('ItemCtrl', ['$scope','$http','$location', '$routeParams', '$sce','$q', function($scope, $http, $location, $routeParams, $sce, $q){
     $scope.orderFilter ="";
     $scope.itemList = [{name:'Bq Aquaris 5 16GB White',price:249.99,image:'assets/img/demo/e_img03.jpg'},
                         {name:'LG 55LA620S 55" LED 3D',price:999.99,image:'assets/img/demo/e_img07.jpg'},
@@ -6,7 +6,7 @@ app.controller('ItemCtrl', ['$scope','$http','$location', function($scope, $http
                         {name:'Keyboard Pro Game',price:49.99,image:'assets/img/demo/e_img02.jpg'},
                         {name:'Doogee Voyager DG300 Black',price:99.99,image:'assets/img/demo/e_img04.jpg'},
                         {name:'Gigabyte GeForce GTX 660',price:224.00,image:'assets/img/demo/e_img05.jpg'}];
-    
+
     $scope.item = {
         id : 1,
         title : '신발',
@@ -18,6 +18,33 @@ app.controller('ItemCtrl', ['$scope','$http','$location', function($scope, $http
         ItemBrandId : 1,
         ItemTypeName : '운동화',
         ItemTypeId : 2
+    }
+
+    //item/view 페이지 initialize
+    $scope.initView = function(){
+        console.log('success_view');
+
+        /*$http.get('/rest/item/'+$routeParams.itemId).then(function(data){
+            $scope.item = data;
+            $scope.item.explain = $sce.trustAsHtml($scope.item.explain);
+        });*/
+        //cookies에 방문 추가
+    }
+
+    //item/list 페이지 initialize
+    //cookies에서 방문한곳 리스팅(limit 4), brandList, typeList, itemList
+    $scope.initList = function(){
+        console.log('success_list');
+
+        /*$q.all([
+            $http.get('/rest/item/'),
+            $http.get('/rest/brand/'),
+            $http.get('/rest/type/')
+        ]).then(function(data){
+            $scope.itemList = data[0];
+            $scope.brandList = data[1];
+            $scope.typeList = data[2];
+        });*/
     }
 
     $scope.addCart = function(itemId){

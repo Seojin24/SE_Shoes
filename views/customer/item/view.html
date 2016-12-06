@@ -1,26 +1,24 @@
-<div class="container">
-    <h2 class="section-title">Motorola Moto G 8GB Black</h2>
+<div class="container" ng-init="initView()">
+    <h2 class="section-title">{{item.title}}</h2>
     <div class="row">
         <div class="col-md-4">
-          <img style="width:90%;" src="assets/img/demo/e_product1.jpg" />
+          <img style="width:90%;" ng-src="/{{item.photo}}" alt=""/>
         </div>
         <div class="col-md-5">
             <h3 class="no-margin-top">Description</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam eum molestias modi error perspiciatis, recusandae commodi laudantium dolorem illo quaerat molestiae quis placeat non saepe harum necessitatibus alias porro at.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis minima repellat incidunt magni laborum porro totam explicabo, quis nostrum aliquid provident, harum.</p>
+            <p>{{item.explain}}</p>
             <h4>Specifications</h4>
             <ul class="unstyled">
-                <li><strong>Memory: </strong> 8GB standard, 16GB version available / RAM- 1GB LPDDR2</li>
-                <li><strong>PROCESSOR: </strong>Qualcomm MSM8x26 quad-core A7 1.2GHz (Adreno 305 450MHz GPU)</li>
-                <li><strong>Bands/Modes: </strong>CDMA: 850/1900 UMTS: 850/900/1700/1900/2100 GSM: 850/900/1800/1900</li>
-                <li><strong>Operating system: </strong>Android 4.4, KitKat</li>
+                <li><strong>Brand: </strong> {{item.ItemBrandName}}</li>
+                <li><strong>Type: </strong>{{item.ItemTypeName}}</li>
+                <li><strong>size: </strong>{{item.size}}</li>
             </ul>
 
         </div>
         <!-- concept function -->
         <div class="col-md-3">
-            <div class="e-price">$ <span>229</span>.00</div>
-            <a href="#" class="btn btn-ar btn-block btn-success"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+            <div class="e-price"><span>{{item.price | currency:"￦":0}}</span></div>
+            <a ng-click="addCart(item.id)" href="javascript:void(0);" class="btn btn-ar btn-block btn-success"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
             <h3 class="right-line">Related Products</h3>
             <div class="ec-box">
                 <div class="ec-box-header"><a href="#">Bq Aquaris 5 16GB White</a></div>
