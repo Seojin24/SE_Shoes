@@ -1,0 +1,27 @@
+<div class="container">
+    <table datatable="ng" dt-options="dtOptions">
+        <thead>
+        <tr>
+            <th>name</th>
+            <!--<th>price</th>-->
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="type in typeList">
+            <td>{{type.name}}</td>
+            <!--<td>{{brand.price}}</td>-->
+            <td>
+                <button class="btn btn-primary" ng-click="typeModify($event, type)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+            </td>
+
+            <a ng-click="typeAdd($event, type)" href="javascript:void(0);" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-heart"></i> Add</a>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>

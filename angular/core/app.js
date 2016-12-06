@@ -3,7 +3,9 @@ var app = angular.module('mainApp', [
     'ngAnimate',
     'ngCookies',
     'ngMaterial',
-    'ngMessages'
+    'ngMessages',
+//    'datatables',
+    'ngFileUpload'
 ]);
 
 /*var app = angular.module('mainApp', [

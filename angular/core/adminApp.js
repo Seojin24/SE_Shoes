@@ -3,7 +3,8 @@ var app = angular.module('adminApp', [
     'ngAnimate',
     'ngMaterial',
     'ngMessages',
-    'datatables'
+    'datatables',
+    'ngFileUpload'
 ]);
 
 app.run(['$rootScope', '$http', '$location', '$controller', function($rootScope, $http, $location, $controller) {
@@ -31,12 +32,12 @@ app.config(function ($routeProvider) {
         templateUrl: '/views/admin/main.html'
     })
     //auction
-    .when('/auction/list/:type', {
-        controller: 'BoardAdminCtrl',
+    .when('/auction/list', {
+        controller: 'AuctionAdminCtrl',
         templateUrl: '/views/admin/auction/list.html'
     })
-    .when('/auction/add/:type', {
-        controller: 'BoardAdminCtrl',
+    .when('/auction/add', {
+        controller: 'AuctionAdminCtrl',
         templateUrl: '/views/admin/auction/add.html'
     })
     //board
