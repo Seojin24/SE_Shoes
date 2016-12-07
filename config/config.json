@@ -58,7 +58,7 @@
             "logging": true,
             "multipleStatements": true,
             "timezone": "+09:00",
-            "upload_path": "webdata/uploads",
+            "upload_path": "webdata",
             "define" : {
                 "charset": "utf8",
                 "collate": "utf8_general_ci"
