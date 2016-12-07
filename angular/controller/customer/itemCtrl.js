@@ -9,14 +9,14 @@ app.controller('ItemCtrl', ['$scope','$http','$location', '$routeParams', '$sce'
 
     $scope.item = {
         id : 1,
-        title : '신발',
+        title : '로얄 이스케이프',
         size : 280,
-        price : 17000,
-        photo : 'assets/img/demo/e_img07.jpg',
-        explain : '참 조은 신발',
-        ItemBrandName : '나이끼',
+        price : 69000,
+        photo : '/webdata/item/1481105197324-11.png',
+        explain : '이름 : 리복 로얄 이스케이프<br>가격 : 69,000<br>분류 : 운동화 > 스니커즈<br>브랜드 정보 : Reebok',
+        ItemBrandName : '리복',
         ItemBrandId : 1,
-        ItemTypeName : '운동화',
+        ItemTypeName : '스니커즈',
         ItemTypeId : 2
     }
 

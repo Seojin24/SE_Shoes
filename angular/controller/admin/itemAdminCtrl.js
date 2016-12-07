@@ -90,7 +90,7 @@ app.controller('ItemAdminCtrl', ['$scope', '$q','$http', '$location', 'Upload','
             // .textContent('현재 입찰금 보다 높은 금액을 입력 해야합니다.')
             .placeholder('Brand title')
             .ariaLabel('Brand title')
-            .initialValue(brand.title)
+            .initialValue(brand.name)
             .targetEvent(ev)
             .ok('변경')
             .cancel('취소');

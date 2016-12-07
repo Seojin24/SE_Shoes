@@ -1,4 +1,4 @@
-app.controller('AuctionAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsBuilder', 'DTColumnBuilder','$mdDialog', function($scope, $q, $http, Upload, DTOptionsBuilder, DTColumnBuilder,$mdDialog){
+app.controller('AuctionAdminCtrl', ['$scope', '$q','$http', 'Upload','$location', 'DTOptionsBuilder', 'DTColumnBuilder','$mdDialog', function($scope, $q, $http, Upload, $location, DTOptionsBuilder, DTColumnBuilder,$mdDialog){
     $scope.initList = function(){
         $http.get('/rest/auction').then(function(data){
             $scope.auctionList = data.data;
@@ -26,7 +26,8 @@ app.controller('AuctionAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsB
         $scope.auction.ItemId = $scope.item.ItemId;
         console.log($scope.auction);
         $http.post('/rest/auction/admin',$scope.auction).then(function(data){
-            console.log(data);
+            alert('경매 상품을 등록하였습니다.')
+            $location.path("../");
         })
     }
 
