@@ -65,10 +65,10 @@ app.config(function ($routeProvider) {
         controller: 'AuctionCtrl',
         templateUrl: '/views/customer/auction/list.html'
     })
-    .when('/auction/view/:itemId', {
-        /*controller: 'ItemCtrl',*/
+    /*.when('/auction/view/:itemId', {
+        controller: 'AuctionCtrl',
         templateUrl: '/views/customer/auction/view.html'
-    })
+    })*/
     .when('/board/list/:type', {
         /*controller: 'ItemCtrl',*/
         templateUrl: '/views/customer/board/list.html'
@@ -78,7 +78,7 @@ app.config(function ($routeProvider) {
         templateUrl: '/views/customer/board/view.html'
     })
     .when('/user/cart', {
-        /*controller: 'MainCtrl',*/
+        controller: 'UserCtrl',
         templateUrl: '/views/customer/user/cart.html'
     })
     .when('/user/order', {

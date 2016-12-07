@@ -9,7 +9,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="auction in auctionList">
-            <td nowrap>{{auction.name}}</td>
+            <td nowrap>{{auction.title}}</td>
             <td nowrap>{{auction.bidPrice}}</td>
             <td nowrap>
                 <timer end-time="auction.endSecond">{{days}} Day {{hours}}:{{minutes}}:{{seconds}}</timer>

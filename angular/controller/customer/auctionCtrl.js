@@ -1,19 +1,5 @@
 app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$sce','$q', '$mdDialog', function($scope, $http, $location, $routeParams, $sce, $q, $mdDialog){
     $scope.orderFilter ="";
-    $scope.auctionList = [{
-        id : 1,
-        title : '신발',
-        size : 280,
-        price : 17000,
-        bidPrice : 10000,
-        photo : 'assets/img/demo/e_img07.jpg',
-        explain : '참 조은 신발',
-        brandName : '나이끼',
-        typeName : '운동화',
-        itemId : 1,
-        auctionStart : '2016-12-03',
-        auctionEnd : '2016-12-09'
-    }]
 
     //item/view 페이지 initialize
     $scope.initView = function(){
@@ -29,18 +15,37 @@ app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$s
     //item/list 페이지 initialize
     //cookies에서 방문한곳 리스팅(limit 4), brandList, typeList, itemList
     $scope.initList = function(){
-        console.log('success_list');
-
-        /*$q.all([
-            $http.get('/rest/item/'),
+        $q.all([
             $http.get('/rest/brand/'),
-            $http.get('/rest/type/')
+            $http.get('/rest/type/'),
+            $http.get('/rest/auction/')
         ]).then(function(data){
-            $scope.itemList = data[0];
-            $scope.brandList = data[1];
-            $scope.typeList = data[2];
-        });*/
+            $scope.brandList = data[0].data;
+            $scope.typeList = data[1].data;
+            $scope.auctionList = data[2].data;
+
+            for(i=0; i<$scope.auctionList.length; i++)
+                $scope.auctionList[i].endSecond = new Date($scope.auctionList[i].auctionEnd)/1;
+        });
     }
+
+    $scope.setBrand=function(brand){
+        if(brand) {
+            $scope.brandFilter=brand.id;
+        }
+        else {
+            $scope.brandFilter='';
+        }
+    }
+    $scope.setType=function(type){
+        if(type) {
+            $scope.typeFilter=type.id;
+        }
+        else {
+            $scope.typeFilter='';
+        }
+    }
+
     $scope.bid = function(ev, auction) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.prompt()

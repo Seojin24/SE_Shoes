@@ -24,6 +24,7 @@
             <li ng-hide="$root.session"><a href="#/signin"  ng-mouseover="sub=0">Login</a></li>
             <li ng-hide="$root.session"><a href="#/signup" ng-mouseover="sub=0">Registry</a></li>
             <li ng-show="$root.session" ng-click="logout()" ng-mouseover="sub=0"><a href="#/signin">Logout</a></li>
+            <li ng-show="$root.session" ng-mouseover="sub=0"><a href="#/user/cart">장바구니</a></li>
             <li ng-show="$root.session"><a href="#/user/mypage" ng-mouseover="sub=0">Mypage</a></li>
             <li><a href="#/item/list" ng-mouseover="sub=0">상품</a></li>
             <li><a href="#/auction/list" ng-click="" ng-mouseover="sub=0">경매</a></li>

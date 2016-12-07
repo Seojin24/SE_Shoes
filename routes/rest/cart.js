@@ -7,7 +7,7 @@ models.Cart.belongsTo(models.Item);
 models.Cart.belongsTo(models.User);
 
 // 특정 유저의 카트 정보 session 이용
-router.get('/', isLogin, function(req, res) {
+router.get('/', function(req, res) {
 	models.Cart.findAll({
         order : 'id ASC',
         where : {UserId : req.session.user.id},
@@ -19,17 +19,20 @@ router.get('/', isLogin, function(req, res) {
     }).then(function(cartSvArr) {
         var cartCliArr = [];
         cartSvArr.forEach(function(cartSv) {
-            var cartCli = {};
-            cartCli.id = cartSv.id;
-            cartCli.itemId = cartSv.ItemId;
-            cartCli.userId = cartSv.UserId;
-            cartCli.title = cartSv.title;
-            cartCli.size = cartSv.size;
-            cartCli.price = cartSv.price;
-            cartCli.photo = cartSv.photo;
-            cartCli.createdAt = cartSv.createdAt;
-            cartCli.updatedAt = cartSv.updatedAt;
-            userCliArr.push(cartCli);
+            cartSv = cartSv.dataValues;
+            cartSv.Item = cartSv.Item.dataValues;
+
+            var cartCli = {
+                id : cartSv.id,
+                createdAt : cartSv.createdAt,
+                updatedAt : cartSv.updatedAt,
+                ItemId : cartSv.Item.ItemId,
+                title : cartSv.Item.title,
+                size : cartSv.Item.size,
+                price : cartSv.Item.price,
+                photo : cartSv.Item.photo
+            };
+            cartCliArr.push(cartCli);
         });
         res.contentType('application/json');
         res.send(cartCliArr);
@@ -37,11 +40,8 @@ router.get('/', isLogin, function(req, res) {
 });
 
 // 카트 추가
-router.post('/', isLogin, function(req, res) {
-    alert(req);
+router.post('/', function(req, res) {
     req.body.UserId = req.session.user.id;
-    req.body.ItemId = req.params.ItemId;
-
 
     models.Cart.create(req.body).then(function() {
         res.send({
@@ -53,7 +53,7 @@ router.post('/', isLogin, function(req, res) {
 });
 
 // 카트에 상품 삭제
-router.delete('/:id', isLogin, function(req, res) {
+router.delete('/:id', function(req, res) {
 	models.Cart.findOne({
         where: {
             id: req.params.id

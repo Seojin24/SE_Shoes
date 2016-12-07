@@ -1,14 +1,11 @@
 app.controller('AuctionAdminCtrl', ['$scope', '$q','$http', 'Upload','DTOptionsBuilder', 'DTColumnBuilder','$mdDialog', function($scope, $q, $http, Upload, DTOptionsBuilder, DTColumnBuilder,$mdDialog){
     $scope.initList = function(){
-        $scope.auctionList = [
-            {name:'갤럭시4',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-12-08', endSecond:1481155200000},
-            {name:'갤럭시7',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-11-28', endSecond:1481155200000},
-            {name:'고구마7',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-11-28', endSecond:1481155200000},
-            {name:'고구마4',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-11-28', endSecond:1481155200000},
-            {name:'계란라면',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-11-28', endSecond:1481155200000},
-            {name:'썬더치킨',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-11-28', endSecond:1481155200000},
-            {name:'토마토',bidPrice:249.99,auctionStart:'2016-09-03',auctionEnd:'2016-11-28', endSecond:1481155200000}  
-        ];
+        $http.get('/rest/auction').then(function(data){
+            $scope.auctionList = data.data;
+            
+            for(i=0; i<$scope.auctionList.length; i++)
+                $scope.auctionList[i].endSecond = new Date($scope.auctionList[i].auctionEnd)/1;
+        })
 
         $scope.dtOptions = DTOptionsBuilder.newOptions()
         .withDisplayLength(10)

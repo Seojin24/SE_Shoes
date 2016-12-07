@@ -34,8 +34,6 @@ app.controller('ItemCtrl', ['$scope','$http','$location', '$routeParams', '$sce'
     //item/list 페이지 initialize
     //cookies에서 방문한곳 리스팅(limit 4), brandList, typeList, itemList
     $scope.initList = function(){
-        console.log('success_list');
-
         $q.all([
             $http.get('/rest/brand/'),
             $http.get('/rest/type/'),
@@ -48,22 +46,30 @@ app.controller('ItemCtrl', ['$scope','$http','$location', '$routeParams', '$sce'
     };
 
     $scope.setBrand=function(brand){
-        if(brand){$scope.brandFilter=brand.id;}else{$scope.brandFilter='';}
+        if(brand) {
+            $scope.brandFilter=brand.id;
+        }
+        else {
+            $scope.brandFilter='';
+        }
     }
     $scope.setType=function(type){
-        if(type){$scope.typeFilter=type.id;}else{$scope.typeFilter='';}
+        if(type) {
+            $scope.typeFilter=type.id;
+        }
+        else {
+            $scope.typeFilter='';
+        }
     }
 
 
 
     $scope.addCart = function(itemId){
         $http.post('/rest/cart/',{ItemId:itemId}).then(function(data){
-            console.log(data);
             if(data.data.error == false){
                 alert('상품을 장바구니에 담았습니다.');
             }
             else{
-                console.log(data);
                 if(data.data.msg == 'doLogin')
                     $location.path("#/signin")  
             } 

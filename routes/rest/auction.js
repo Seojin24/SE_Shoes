@@ -26,36 +26,38 @@ router.get('/', function(req, res) {
         include: {
             model: models.Item,
             attributes: ['title', 'size', 'price', 'photo'],
-            include: {
+            include: [{
                 model: models.ItemBrand,
                 attributes: ['name']
-            },
-            include: {
+            }, {
                 model: models.ItemType,
                 attributes: ['name']
-            }
+            }]
         }
     }).then(function(auctionSvArr) {
-        res.send(auctionSvArr);
-        /*var auctionCliArr = [];
-        auctionSvArr.forEach(function(auctionSv) {
-            var auctionCli = {
-                id : auctionSv.id,
-                bidPrice : auctionSv.bidPrice,
-                auctionStart : auctionSv.auctionStart,
-                auctionEnd : auctionSv.auctionEnd,
-                itemId : auctionSv.ItemId,
-                title : auctionSv.Items[0].title,
-                size : auctionSv.Items[0].size,
-                photo : auctionSv.Items[0].photo,
-                price : auctionSv.Items[0].price,
-                brandName : auctionSv.Items[0].ItemBrands[0].name,
-                typeName : auctionSv.Items[0].ItemTypes[0].name
-            };
+        var auctionCliArr = [];
+        auctionSvArr.forEach(function(auctionSv){
+            var auctionCli = {};
+            auctionSv = auctionSv.dataValues;
+            auctionSv.Item = auctionSv.Item.dataValues;
+            auctionCli.id = auctionSv.id;
+            auctionCli.bidPrice = auctionSv.bidPrice;
+            auctionCli.auctionStart = auctionSv.auctionStart;
+            auctionCli.auctionEnd = auctionSv.auctionEnd;
+            auctionCli.ItemId = auctionSv.ItemId;
+            auctionCli.UserId = auctionSv.UserId;
+            auctionCli.title = auctionSv.Item.title;
+            auctionCli.size = auctionSv.Item.size;
+            auctionCli.price = auctionSv.Item.price;
+            auctionCli.photo = auctionSv.Item.photo;
+            auctionCli.itemBrandName = auctionSv.Item.ItemBrand.dataValues.name;
+            auctionCli.itemTypeName = auctionSv.Item.ItemType.dataValues.name;
+
             auctionCliArr.push(auctionCli);
-        });
+        })
+
         res.contentType('application/json');
-        res.send(auctionCliArr);*/
+        res.send(auctionCliArr);
     });
 });
 
@@ -63,21 +65,37 @@ router.get('/', function(req, res) {
 router.get('/:id', function(req, res) {
     models.Auction.findOne({
         order : 'id ASC',
-        where : 'id : req.params.id',
+        where : {id : req.params.id},
         include: {
             model: models.Item,
             attributes: ['title', 'size', 'price', 'photo'],
-            include: {
+            include: [{
                 model: models.ItemBrand,
                 attributes: ['name']
-            },
-            include: {
+            }, {
                 model: models.ItemType,
                 attributes: ['name']
-            }
+            }]
         }
     }).then(function(auctionSv) {
-        res.send(auctionSv);
+        var auctionCli = {};
+        auctionSv = auctionSv.dataValues;
+        auctionSv.Item = auctionSv.Item.dataValues;
+        auctionCli.id = auctionSv.id;
+        auctionCli.bidPrice = auctionSv.bidPrice;
+        auctionCli.auctionStart = auctionSv.auctionStart;
+        auctionCli.auctionEnd = auctionSv.auctionEnd;
+        auctionCli.ItemId = auctionSv.ItemId;
+        auctionCli.UserId = auctionSv.UserId;
+        auctionCli.title = auctionSv.Item.title;
+        auctionCli.size = auctionSv.Item.size;
+        auctionCli.price = auctionSv.Item.price;
+        auctionCli.photo = auctionSv.Item.photo;
+        auctionCli.itemBrandName = auctionSv.Item.ItemBrand.dataValues.name;
+        auctionCli.itemTypeName = auctionSv.Item.ItemType.dataValues.name;
+        
+        res.contentType('application/json');
+        res.send(auctionCli);
     });
 });
 
