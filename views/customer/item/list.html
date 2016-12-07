@@ -55,10 +55,6 @@
 
                 <!-- 이게 진짜 -->
                 <div class="col-sm-4" ng-animate="'animate'" ng-repeat="item in itemList | filter:{'ItemBrandId':brandFilter,'ItemTypeId':typeFilter}">
-
-
-
-
                     <div class="ec-box">
                         <div class="ec-box-header"><a href="#/item/view/{{item.id}}">[{{item.ItemBrandName}}|{{item.ItemTypeName}}]{{item.title}}</a></div>
                         <a href="#/item/view/{{item.id}}"><img ng-src="/{{item.photo}}" alt="" style="width:100%;"/></a>

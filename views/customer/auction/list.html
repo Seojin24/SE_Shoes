@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="ec-filters-menu">
-                <h3 class="section-title">Filters</h3>
+                <h3 class="section-title"></h3>
+                <!-- 안되면 주석처리 -->
                 <div class="col-sm-6 col-xs-6">
                     <h4>Select Brand</h4>
                     <ul>
@@ -25,7 +26,9 @@
             <div class="row" id="Container">
                 <div class="col-sm-4" ng-animate="'animate'" ng-repeat="auction in auctionList | filter:{'itemBrandId':brandFilter,'itemTypeId':typeFilter}">
                     <div class="ec-box">
-                        <div class="ec-box-header"><a href="#/item/view/{{auction.itemId}}">[{{auction.brandName}}|{{auction.typeName}}]{{auction.title}}</a></div>
+                        <div class="ec-box-header">
+                        <timer end-time="auction.endSecond" class="pull-left">{{days}} Day {{hours}}:{{minutes}}:{{seconds}}</timer>
+                        <a href="#/item/view/{{auction.itemId}}" class="pull-right">[{{auction.itemBrandName}}|{{auction.itemTypeName}}]{{auction.title}}</a></div>
                         <a href="#/item/view/{{auction.itemId}}"><img ng-src="/{{auction.photo}}" alt=""/ style="width:100%;"></a>
                         <div class="ec-box-footer">
                             <span class="label label-primary"><del class="text-muted">{{auction.price | currency:"￦":0}}</del>&nbsp;{{auction.bidPrice | currency:"￦":0}}</span>

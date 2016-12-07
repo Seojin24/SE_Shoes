@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
         where : {UserId : req.session.user.id},
         include: {
             model: models.Item,
-            attributes: ['title', 'size', 'price', 'photo'],
+            attributes: ['id', 'title', 'size', 'price', 'photo'],
             order: [['createdAt', 'DESC']]
         }
     }).then(function(cartSvArr) {
@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
                 id : cartSv.id,
                 createdAt : cartSv.createdAt,
                 updatedAt : cartSv.updatedAt,
-                ItemId : cartSv.Item.ItemId,
+                ItemId : cartSv.Item.id,
                 title : cartSv.Item.title,
                 size : cartSv.Item.size,
                 price : cartSv.Item.price,

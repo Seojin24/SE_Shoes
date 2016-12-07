@@ -41,6 +41,7 @@ router.post('/', function(req, res) {
 	    if (user === null) {
 	        req.body.password = sha256(req.body.password);
             req.body.type = 1;
+            req.body.mileage = 1000;
 
             models.User.create(req.body).then(function(user) {
                 res.send({

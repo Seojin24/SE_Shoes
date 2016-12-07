@@ -2,16 +2,11 @@ var express = require('express');
 var router = express.Router();
 var models = require('../../models');
 var session = require('express-session');
-var sequelize = require("sequelize");
+var sequelize = require('sequelize');
 
 models.OrderItem.belongsTo(models.Item);
 models.OrderItem.belongsTo(models.Order);
 models.Order.belongsTo(models.User);
-
-//order one
-//order List
-//order statistics
-//order post
 
 // one orderList
 router.get('/:id', function(req, res) {
@@ -85,14 +80,31 @@ router.post('/', function(req, res) {
         UserId : req.session.user.id,
         price : req.body.price,
         discount : req.body.discount
-    }
-    model.Order.create(orderInput).then(function(order) {
-        sequelize.transaction(function(t){
+    };
+    console.log(orderInput);
+    models.Order.create(orderInput)
+    .then(function(row) {
+        req.body.itemList.forEach(function(itemCli) {
+            models.OrderItem.create({
+                ItemId:itemCli.ItemId,
+                OrderId:row.id
+            });
+        });
+    })
+    .then(function(){
+        models.Cart.destroy({
+            where:{Userid : req.session.user.id}
+        });
+    }).catch(function(err){
+        res.send({error:true, msg:err});
+    });
+    res.send({error:false});
+    /*sequelize.transaction(function(t){
             req.body.itemList.forEach(function(itemCli) {
-                model.OrderItem.create({
+                models.OrderItem.create({
                     ItemId:itemCli.id,
                     OrderId:order.id
-                })
+                }, {transaction:t});
             }).catch(function(err){
                 t.rollback()
                 res.send({error:true});
@@ -102,8 +114,7 @@ router.post('/', function(req, res) {
                 console.log("transaction done");
                 res.send({error:false});
             })
-        })
-    })
+        })*/
 });
 
 function loadUser(req,res,next) {

@@ -1,4 +1,4 @@
-app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$sce','$q', '$mdDialog', function($scope, $http, $location, $routeParams, $sce, $q, $mdDialog){
+app.controller('AuctionCtrl', ['$scope', '$rootScope','$http','$location', '$routeParams','$q', '$mdDialog', function($scope, $rootScope, $http, $location, $routeParams, $q, $mdDialog){
     $scope.orderFilter ="";
 
     //item/view 페이지 initialize
@@ -80,7 +80,7 @@ app.controller('AuctionCtrl', ['$scope','$http','$location', '$routeParams', '$s
                     alert('현재 입찰금 보다 금액이 적습니다.');
                 }
             }
-            }, function() {
-            });
-        };
+        }, function() {
+        });
+    };
 }]);

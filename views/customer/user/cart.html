@@ -1,7 +1,8 @@
 <div class="container" ng-init="initCart()">
-   <div class="row">
-       <div class="col-md-8">
-           <table class="table">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 ng-hide="setOrder">장바구니</h3> <h3 ng-show="setOrder">주문</h3>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>#ID</th>
@@ -18,22 +19,72 @@
                         <td>{{cart.price | currency:"￦":0}}</td>
                     </tr>
                 </tbody>
-           </table>
-       </div>
+            </table>
+        </div>
        <!-- concept function -->
         <div class="col-md-4">
             <div class="e-price">￦ <span>{{sumPrice}}</span></div>
-               <a href="#/user/order" class="btn btn-ar btn-block btn-success"><i class="fa fa-shopping-cart"></i> Order</a>
-               <h3 class="right-line">Related Products</h3>
-               <div class="ec-box">
-                   <div class="ec-box-header"><a href="#">Bq Aquaris 5 16GB White</a></div>
-                   <a href="#"><img src="assets/img/demo/e_img03.jpg" alt=""></a>
-                   <div class="ec-box-footer">
-                       <span class="label label-primary">$ 249.99</span>
-                       <a href="#" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+            <div ng-hide="setOrder">
+                <a href="javascript:void(0);" ng-click="setOrder=1" class="btn btn-ar btn-block btn-success"><i class="fa fa-shopping-cart"></i> Order</a>
+                <h3 class="right-line">Related Products</h3>
+                <div class="ec-box">
+                    <div class="ec-box-header"><a href="#">Bq Aquaris 5 16GB White</a></div>
+                    <a href="#"><img src="assets/img/demo/e_img03.jpg" alt=""></a>
+                    <div class="ec-box-footer">
+                        <span class="label label-primary">$ 249.99</span>
+                        <a href="#" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="md-inline-form" ng-show="setOrder" >
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+    <div>
+        주문정보
+    </div>
+    </md-content>
+    <md-content layout-padding>
+        <div>
+            <form name="userForm" ng-submit="addOrder()">
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>주소</label>
+                        <input ng-model="$root.session.address" disabled>
+                    </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>보유 마일리지</label>
+                        <input type="number" ng-model="$root.session.mileage" disabled>
+                    </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                    <!-- <md-input-container class="md-block col-sm-6 col-xs-6" flex-gt-sm>
+                        <label>사용 마일리지</label>
+                        <input type="number" ng-model="order.discount">
+                    </md-input-container> -->
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>사용 마일리지</label>
+                        <input type="number" ng-model="order.discount" value="0" required>
+                    </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block col-sm-6 col-xs-6" flex-gt-sm>
+                        <label>총 가격</label>
+                        <input type="number" ng-model="sumPrice" disabled>
+                    </md-input-container>
+                    <md-input-container class="md-block col-sm-6 col-xs-6" flex-gt-sm>
+                        <label>결제 가격</label>
+                        <input type="number" ng-model="order.price" disabled>
+                    </md-input-container>
+                </div>
+                <md-input-container md-no-float class="md-block">
+                    <button type="submit" class="btn btn-ar btn-block btn-success"><i class="fa fa-shopping-cart"></i> 결제</button>
+                </md-input-container>
+            </form>
+        </div>
+    </md-content>
 </div>

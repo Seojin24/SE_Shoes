@@ -18,7 +18,7 @@
         </div>
         <!-- concept function -->
         <div class="col-md-3">
-            <div class="e-price"><span>{{item.price | currency:"￦":0}}</span></div>
+            <div class="e-price"><timer end-time="auction.endSecond">{{days}} Day {{hours}}:{{minutes}}:{{seconds}}</timer><span>{{item.price | currency:"￦":0}}</span></div>
             <a ng-click="addCart(item.id)" href="javascript:void(0);" class="btn btn-ar btn-block btn-success"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
             <h3 class="right-line">Related Products</h3>
             <div class="ec-box">
